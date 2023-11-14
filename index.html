@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jimx</title>
+    <style>
+         body {
+            background-image: url(hys.jpg);
+            background-attachment: fixed;
+            background-size: contain;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 20;
+        }
+
+        .calculator {
+            background-color: rgb(148, 207, 209);
+            color: black;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            padding: 75px;
+            width: 550px;
+            text-align: center;
+            margin: 100px;
+        }
+
+        .display {
+            font-size: 40px;
+            color: #fff;
+            background-color: #444;
+            border: 2;
+            width: 85%;
+            padding: 40px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .button {
+            width: 150px;
+            height: 80px;
+            font-size: 30px;
+            color: #fff;
+            margin: 2px;
+            background-color: #666;
+            border: 2px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .button:hover {
+            background-color: #8b5c5c;
+            transform: scale(1.1);
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input class="display" type="text" id="display" disabled>
+        <div class="row">
+            <button class="button" onclick="clearInput()">C</button>
+            <button class="button" onclick="calculatePercentage()">%</button>
+            <button class="button" onclick="deleteLastCharacter()">DEL</button>
+            <button class="button" onclick="appendToDisplay('/')">/</button>
+        </div>
+        <div class="row">
+            <button class="button" onclick="appendToDisplay('7')">7</button>
+            <button class="button" onclick="appendToDisplay('8')">8</button>
+            <button class="button" onclick="appendToDisplay('9')">9</button>
+            <button class="button" onclick="appendToDisplay('*')">*</button>
+        </div>
+        <div class="row">
+            <button class="button" onclick="appendToDisplay('4')">4</button>
+            <button class="button" onclick="appendToDisplay('5')">5</button>
+            <button class="button" onclick="appendToDisplay('6')">6</button>
+            <button class="button" onclick="appendToDisplay('-')">-</button>
+        </div>
+        <div class="row">
+            <button class="button" onclick="appendToDisplay('1')">1</button>
+            <button class="button" onclick="appendToDisplay('2')">2</button>
+            <button class="button" onclick="appendToDisplay('3')">3</button>
+            <button class="button" onclick="add()">+</button>
+        </div>
+        <div class="row">
+            <button class="button" onclick="appendToDisplay('00')">00</button>
+            <button class="button" onclick="appendToDisplay('0')">0</button>
+            <button class="button" onclick="appendToDisplay('.')">.</button>
+            <button class="button" onclick="calculateResult()">=</button>
+        </div>
+    </div>
+
+    <script>
+        let currentInput = '';
+
+        function clearInput() {
+            currentInput = '';
+            document.getElementById('display').value = '';
+        }
+
+        function appendToDisplay(value) {
+            currentInput += value;
+            document.getElementById('display').value = currentInput;
+        }
+
+        function deleteLastCharacter() {
+            currentInput = currentInput.slice(0, -1);
+            document.getElementById('display').value = currentInput;
+        }
+
+        function calculatePercentage() {
+            const result = eval(currentInput) / 100;
+            document.getElementById('display').value = result;
+            currentInput = result.toString();
+        }
+
+        function add() {
+            appendToDisplay('+');
+        }
+
+        function calculateResult() {
+            const result = eval(currentInput);
+            document.getElementById('display').value = result;
+            currentInput = result.toString();
+        }
+    </script>
+</body>
+</html>
